@@ -1,4 +1,3 @@
-
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -363,6 +362,96 @@ def predict_price(current_price):
     return round(prediction, 2)
 
 
+
+# =========================================================
+# PRICE TREND DATA GENERATION
+# =========================================================
+
+@st.cache_data
+def generate_price_history(crop, days_count):
+
+    base_price = BASE_PRICES[crop]
+
+    # Consistent demo historical data for each crop and period
+    seed_value = sum(ord(char) for char in crop) + days_count
+    rng = np.random.default_rng(seed_value)
+
+    dates = pd.date_range(
+        end=pd.Timestamp.today().normalize(),
+        periods=days_count
+    )
+
+    trend_strength = {
+        "Wheat": 80,
+        "Rice": 50,
+        "Maize": -30,
+        "Potato": 40,
+        "Tomato": 120,
+        "Onion": -70,
+        "Soybean": 60,
+        "Mustard": 90,
+        "Cotton": 30
+    }
+
+    trend = trend_strength.get(crop, 40)
+
+    price_trend = np.linspace(
+        -trend / 2,
+        trend / 2,
+        days_count
+    )
+
+    noise = rng.normal(
+        0,
+        base_price * 0.025,
+        days_count
+    )
+
+    prices = base_price + price_trend + noise
+
+    return pd.DataFrame({
+        "Date": dates,
+        "Price": prices.round(2)
+    })
+
+
+# =========================================================
+# PRICE TREND ANALYSIS
+# =========================================================
+
+def analyze_price_trend(history_df):
+
+    first_price = history_df["Price"].iloc[0]
+    current_price = history_df["Price"].iloc[-1]
+
+    change = current_price - first_price
+    change_percent = (change / first_price) * 100
+
+    if change_percent > 2:
+        trend_status = "📈 Increasing"
+        advice = (
+            "Prices are showing an upward trend. If you do not need "
+            "immediate cash, monitoring the market for a better selling "
+            "opportunity may be useful."
+        )
+
+    elif change_percent < -2:
+        trend_status = "📉 Decreasing"
+        advice = (
+            "Prices are showing a downward trend. Consider selling sooner "
+            "if the downward trend continues."
+        )
+
+    else:
+        trend_status = "➖ Stable"
+        advice = (
+            "Prices are relatively stable. Compare nearby mandis before "
+            "making a selling decision."
+        )
+
+    return trend_status, change, change_percent, advice
+
+
 # =========================================================
 # HEADER
 # =========================================================
@@ -694,6 +783,174 @@ if analyze:
 """)
 
 
+
+# =========================================================
+# PRICE TREND DASHBOARD
+# =========================================================
+
+st.divider()
+
+st.header(T("📈 Price Trend Dashboard"))
+
+st.info(
+    T(
+        "Track historical price trends and understand whether market prices "
+        "are increasing, decreasing or stable."
+    )
+)
+
+trend_col1, trend_col2 = st.columns(2)
+
+with trend_col1:
+    trend_crop = st.selectbox(
+        T("🌾 Select Crop for Trend Analysis"),
+        CROPS,
+        index=CROPS.index(crop),
+        key="trend_crop"
+    )
+
+with trend_col2:
+    trend_period = st.selectbox(
+        T("📅 Select Time Period"),
+        [7, 15, 30],
+        format_func=lambda x: f"Last {x} Days",
+        key="trend_period"
+    )
+
+history_df = generate_price_history(
+    trend_crop,
+    trend_period
+)
+
+(
+    trend_status,
+    price_change,
+    change_percent,
+    trend_advice
+) = analyze_price_trend(history_df)
+
+current_trend_price = history_df["Price"].iloc[-1]
+highest_price = history_df["Price"].max()
+lowest_price = history_df["Price"].min()
+average_price = history_df["Price"].mean()
+
+st.subheader(T("📊 Market Price Statistics"))
+
+metric1, metric2, metric3, metric4 = st.columns(4)
+
+metric1.metric(
+    T("💰 Current Price"),
+    f"₹{current_trend_price:,.0f}"
+)
+
+metric2.metric(
+    T("⬆️ Highest Price"),
+    f"₹{highest_price:,.0f}"
+)
+
+metric3.metric(
+    T("⬇️ Lowest Price"),
+    f"₹{lowest_price:,.0f}"
+)
+
+metric4.metric(
+    T("📊 Average Price"),
+    f"₹{average_price:,.0f}"
+)
+
+st.divider()
+
+change_col1, change_col2 = st.columns(2)
+
+with change_col1:
+    st.metric(
+        T("📈 Price Change"),
+        f"₹{price_change:,.2f}",
+        f"{change_percent:.2f}%"
+    )
+
+with change_col2:
+    st.metric(
+        T("🤖 Trend Status"),
+        trend_status
+    )
+
+st.divider()
+
+st.subheader(T("📈 Historical Price Trend"))
+
+chart_df = history_df.set_index("Date")
+st.line_chart(
+    chart_df["Price"],
+    use_container_width=True
+)
+
+st.divider()
+
+st.subheader(T("📋 Historical Price Data"))
+
+display_history = history_df.copy()
+display_history["Date"] = (
+    display_history["Date"].dt.strftime("%d %b %Y")
+)
+display_history["Price"] = display_history["Price"].round(2)
+
+st.dataframe(
+    display_history,
+    use_container_width=True,
+    hide_index=True
+)
+
+st.divider()
+
+st.subheader(T("🧠 Smart Market Insight"))
+
+if change_percent > 2:
+    st.success(f"""
+### 📈 {T("PRICE TREND: INCREASING")}
+
+🌾 **{trend_crop}**
+
+💰 **{T("Current Price")}:** ₹{current_trend_price:,.0f} / Quintal
+
+📊 **{T("Price Change")}:** {change_percent:.2f}%
+
+💡 **{T("Market Insight")}**
+
+{T(trend_advice)}
+""")
+
+elif change_percent < -2:
+    st.warning(f"""
+### 📉 {T("PRICE TREND: DECREASING")}
+
+🌾 **{trend_crop}**
+
+💰 **{T("Current Price")}:** ₹{current_trend_price:,.0f} / Quintal
+
+📊 **{T("Price Change")}:** {change_percent:.2f}%
+
+💡 **{T("Market Insight")}**
+
+{T(trend_advice)}
+""")
+
+else:
+    st.info(f"""
+### ➖ {T("PRICE TREND: STABLE")}
+
+🌾 **{trend_crop}**
+
+💰 **{T("Current Price")}:** ₹{current_trend_price:,.0f} / Quintal
+
+📊 **{T("Price Change")}:** {change_percent:.2f}%
+
+💡 **{T("Market Insight")}**
+
+{T(trend_advice)}
+""")
+
+
 # =========================================================
 # FOOTER
 # =========================================================
@@ -703,3 +960,4 @@ st.divider()
 st.caption(
     "🇮🇳 MandiVision AI | Smart Agriculture Decision Support System"
 )
+
