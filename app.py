@@ -55,26 +55,49 @@ st.markdown("""
 
 
 /* =========================================================
-   🌾 TITLE
+   🌾 FIXED TITLE + SUBTITLE
    ========================================================= */
 
 .main-title {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+
     text-align: center;
     font-size: 44px;
     font-weight: 900;
     color: #166534;
     letter-spacing: 0.5px;
     text-shadow: 1px 2px 4px rgba(255,255,255,0.9);
-}
 
+    background: rgba(255, 255, 255, 0.92);
+    padding: 10px 0 4px 0;
+    backdrop-filter: blur(8px);
+}
 
 /* Subtitle */
 .subtitle {
+    position: fixed;
+    top: 65px;
+    left: 0;
+    width: 100%;
+    z-index: 9998;
+
     text-align: center;
     font-size: 18px;
     color: #374151;
-    margin-bottom: 20px;
     font-weight: 600;
+
+    background: rgba(255, 255, 255, 0.92);
+    padding: 4px 0 10px 0;
+    backdrop-filter: blur(8px);
+}
+
+/* Header ke neeche content ko space dena */
+.block-container {
+    padding-top: 120px !important;
 }
 
 
@@ -185,14 +208,18 @@ section[data-testid="stSidebar"] {
 @media (max-width: 768px) {
 
     .main-title {
-        font-size: 30px;
+        font-size: 28px;
+        padding: 8px 0 3px 0;
     }
 
     .subtitle {
-        font-size: 15px;
+        top: 48px;
+        font-size: 14px;
+        padding: 3px 8px 8px 8px;
     }
 
     .block-container {
+        padding-top: 100px !important;
         padding-left: 1rem;
         padding-right: 1rem;
     }
