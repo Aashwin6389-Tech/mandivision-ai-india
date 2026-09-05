@@ -67,32 +67,14 @@ st.markdown("""
     text-shadow: 1px 2px 4px rgba(255,255,255,0.9);
 }
 
+
 /* Subtitle */
 .subtitle {
     text-align: center;
     font-size: 18px;
     color: #374151;
-    margin-bottom: 0;
+    margin-bottom: 20px;
     font-weight: 600;
-}
-
-/* =========================================================
-   📌 STICKY HEADER - TITLE + SUBTITLE
-   ========================================================= */
-
-.sticky-header {
-    position: sticky;
-    top: 0;
-    z-index: 9999;
-    width: 100%;
-    background: rgba(255, 255, 255, 0.94);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    padding: 10px 20px 12px 20px;
-    margin-bottom: 18px;
-    border-bottom: 1px solid rgba(34, 139, 34, 0.20);
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
-    border-radius: 0 0 14px 14px;
 }
 
 
@@ -611,23 +593,17 @@ def analyze_price_trend(history_df):
     elif change_percent < -2:
         trend_status = "📉 Decreasing"
         advice = (
-            # =========================================================
-# HEADER
-# =========================================================
+            "Prices are showing a downward trend. Consider selling sooner "
+            "if the downward trend continues."
+        )
 
-st.markdown(
-    f'''
-    <div class="sticky-header">
-        <div class="main-title">🌾 MandiVision AI India 🇮🇳</div>
-        <div class="subtitle">
-            {T("Smart Mandi Price and Farmer Decision Support System")}
-        </div>
-    </div>
-    ''',
-    unsafe_allow_html=True
-)
+    else:
+        trend_status = "➖ Stable"
+        advice = (
+            "Prices are relatively stable. Compare nearby mandis before "
+            "making a selling decision."
+        )
 
-st.divider()
     return trend_status, change, change_percent, advice
 
 
@@ -1139,4 +1115,3 @@ st.divider()
 st.caption(
     "🇮🇳 MandiVision AI | Smart Agriculture Decision Support System"
 )
-
