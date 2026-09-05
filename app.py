@@ -49,67 +49,125 @@ st.markdown("""
 
 /* Main content area */
 .block-container {
-    padding-top: 1.5rem;
-    padding-bottom: 2rem;
+    padding-top: 10.5rem !important;
+    padding-bottom: 3rem;
+    max-width: 1500px;
 }
 
-
 /* =========================================================
-   🌾 FIXED TITLE + SUBTITLE
+   🌾 FIXED PREMIUM HEADER
    ========================================================= */
 
 .main-title {
     position: fixed;
-    top: 0;
+    top: 2.65rem;
     left: 0;
     width: 100%;
-    z-index: 9999;
+    z-index: 999999;
 
     text-align: center;
-    font-size: 44px;
+    font-size: 42px;
+    line-height: 1.15;
     font-weight: 900;
-    color: #166534;
-    letter-spacing: 0.5px;
-    text-shadow: 1px 2px 4px rgba(255,255,255,0.9);
+    color: #123b2a !important;
+    letter-spacing: 0.3px;
+    text-shadow: none;
 
-    background: rgba(255, 255, 255, 0.92);
-    padding: 10px 0 4px 0;
-    backdrop-filter: blur(8px);
+    background: linear-gradient(
+        135deg,
+        rgba(235, 248, 238, 0.98),
+        rgba(255, 248, 226, 0.98)
+    );
+    border-bottom: 0;
+    padding: 9px 20px 3px 20px;
+    box-sizing: border-box;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 3px 16px rgba(20, 83, 45, 0.12);
 }
 
-/* Subtitle */
+/* Subtitle fixed below title */
 .subtitle {
     position: fixed;
-    top: 65px;
+    top: 5.55rem;
     left: 0;
     width: 100%;
-    z-index: 9998;
+    z-index: 999998;
 
     text-align: center;
-    font-size: 18px;
-    color: #374151;
-    font-weight: 600;
+    font-size: 17px;
+    line-height: 1.25;
+    color: #5b3a1f !important;
+    font-weight: 700;
 
-    background: rgba(255, 255, 255, 0.92);
-    padding: 4px 0 10px 0;
-    backdrop-filter: blur(8px);
+    background: rgba(255, 248, 226, 0.98);
+    padding: 3px 20px 10px 20px;
+    box-sizing: border-box;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 14px rgba(91, 58, 31, 0.10);
 }
-
-/* Header ke neeche content ko space dena */
-.block-container {
-    padding-top: 120px !important;
-}
-
 
 /* =========================================================
-   🧊 GLASS EFFECT FOR STREAMLIT CONTENT
+   🌅 AGRICULTURE BACKGROUND
+   ========================================================= */
+
+.stApp {
+    background-image:
+        linear-gradient(
+            rgba(224, 239, 220, 0.62),
+            rgba(250, 237, 204, 0.62)
+        ),
+        url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=2200&q=90");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* Add a soft content surface so text is readable */
+.main .block-container > div {
+    position: relative;
+}
+
+/* =========================================================
+   🧑‍🌾 SECTION HEADERS
+   ========================================================= */
+
+h1, h2, h3 {
+    font-weight: 900 !important;
+    color: #173f2b !important;
+    text-shadow: 0 1px 1px rgba(255,255,255,0.7);
+}
+
+[data-testid="stHeader"] {
+    background: transparent;
+}
+
+/* Streamlit labels and normal text */
+.stMarkdown, .stText, label, [data-testid="stWidgetLabel"] {
+    color: #173f2b !important;
+}
+
+[data-testid="stWidgetLabel"] p,
+[data-testid="stWidgetLabel"] label {
+    color: #173f2b !important;
+    font-weight: 700 !important;
+}
+
+/* =========================================================
+   🧊 GLASS CARDS / CONTAINERS
    ========================================================= */
 
 div[data-testid="stVerticalBlockBorderWrapper"] {
-    background: rgba(255, 255, 255, 0.32);
+    background: rgba(255, 255, 255, 0.60);
+    border: 1px solid rgba(255, 255, 255, 0.75);
     border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(40, 70, 45, 0.10);
+    backdrop-filter: blur(5px);
 }
 
+/* Horizontal blocks look more like sections */
+div[data-testid="stHorizontalBlock"] {
+    border-radius: 16px;
+}
 
 /* =========================================================
    🎛️ INPUT BOXES
@@ -117,10 +175,16 @@ div[data-testid="stVerticalBlockBorderWrapper"] {
 
 div[data-baseweb="select"] > div,
 div[data-testid="stNumberInput"] > div {
-    background: rgba(255, 255, 255, 0.92);
-    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.96) !important;
+    border: 2px solid rgba(22, 101, 52, 0.16);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(30, 70, 40, 0.08);
 }
 
+div[data-baseweb="select"] *,
+div[data-testid="stNumberInput"] * {
+    color: #173f2b !important;
+}
 
 /* =========================================================
    🚀 BUTTONS
@@ -128,19 +192,21 @@ div[data-testid="stNumberInput"] > div {
 
 .stButton > button {
     width: 100%;
-    border-radius: 12px;
-    min-height: 46px;
-    font-weight: 800;
-    border: 1px solid rgba(34, 139, 34, 0.25);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    min-height: 50px;
+    border-radius: 13px;
+    font-weight: 850;
+    color: #123b2a !important;
+    background: linear-gradient(135deg, #e8f5e9, #fff4d6) !important;
+    border: 2px solid rgba(34, 139, 34, 0.20);
+    box-shadow: 0 5px 15px rgba(30, 70, 40, 0.10);
     transition: all 0.2s ease;
 }
 
 .stButton > button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 7px 18px rgba(0,0,0,0.13);
+    box-shadow: 0 9px 22px rgba(30, 70, 40, 0.16);
+    border-color: rgba(22, 101, 52, 0.35);
 }
-
 
 /* =========================================================
    📊 TABLES
@@ -149,9 +215,9 @@ div[data-testid="stNumberInput"] > div {
 div[data-testid="stDataFrame"] {
     border-radius: 14px;
     overflow: hidden;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.07);
+    box-shadow: 0 7px 20px rgba(30, 70, 40, 0.10);
+    background: rgba(255,255,255,0.90);
 }
-
 
 /* =========================================================
    📈 CHART AREA
@@ -159,21 +225,11 @@ div[data-testid="stDataFrame"] {
 
 div[data-testid="stArrowVegaLiteChart"],
 div[data-testid="stVegaLiteChart"] {
-    background: rgba(255,255,255,0.72);
+    background: rgba(255,255,255,0.88);
     border-radius: 16px;
     padding: 10px;
+    box-shadow: 0 7px 20px rgba(30, 70, 40, 0.08);
 }
-
-
-/* =========================================================
-   🧑‍🌾 HEADERS
-   ========================================================= */
-
-h1, h2, h3 {
-    font-weight: 800;
-    color: #14532d;
-}
-
 
 /* =========================================================
    📍 INFO / SUCCESS / WARNING BOXES
@@ -181,25 +237,34 @@ h1, h2, h3 {
 
 div[data-testid="stAlert"] {
     border-radius: 14px;
+    box-shadow: 0 5px 16px rgba(30, 70, 40, 0.07);
 }
 
-
 /* =========================================================
-   🌿 SIDEBAR - FARM IMAGE
+   🌿 SIDEBAR
    ========================================================= */
 
 section[data-testid="stSidebar"] {
     background-image:
         linear-gradient(
-            rgba(220, 245, 220, 0.55),
-            rgba(220, 245, 220, 0.55)
+            rgba(220, 245, 220, 0.68),
+            rgba(255, 248, 226, 0.68)
         ),
         url("https://images.unsplash.com/photo-1499529112087-3cb3b73cec95?auto=format&fit=crop&w=1200&q=85");
-
     background-size: cover;
     background-position: center;
 }
 
+/* =========================================================
+   ✨ DIVIDERS
+   ========================================================= */
+
+hr {
+    border: 0;
+    height: 2px;
+    background: rgba(22, 101, 52, 0.15);
+    margin: 1.4rem 0;
+}
 
 /* =========================================================
    📱 MOBILE RESPONSIVE
@@ -207,23 +272,23 @@ section[data-testid="stSidebar"] {
 
 @media (max-width: 768px) {
 
+    .block-container {
+        padding-top: 8rem !important;
+        padding-left: 0.8rem;
+        padding-right: 0.8rem;
+    }
+
     .main-title {
-        font-size: 28px;
-        padding: 8px 0 3px 0;
+        top: 2.55rem;
+        font-size: 27px;
+        padding: 7px 8px 2px 8px;
     }
 
     .subtitle {
-        top: 48px;
-        font-size: 14px;
+        top: 4.95rem;
+        font-size: 13px;
         padding: 3px 8px 8px 8px;
     }
-
-    .block-container {
-        padding-top: 100px !important;
-        padding-left: 1rem;
-        padding-right: 1rem;
-    }
-
 }
 
 </style>
@@ -650,6 +715,36 @@ st.markdown(
 
 st.divider()
 
+
+st.markdown("""
+<div style="
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+    margin:8px 0 20px 0;
+">
+  <div style="background:rgba(255,255,255,.78);padding:14px;border-radius:15px;text-align:center;box-shadow:0 5px 15px rgba(30,70,40,.08);">
+    <div style="font-size:25px;">🌾</div>
+    <b style="color:#173f2b;">Crop Prices</b><br>
+    <span style="color:#5b3a1f;font-size:13px;">Smart mandi insights</span>
+  </div>
+  <div style="background:rgba(255,255,255,.78);padding:14px;border-radius:15px;text-align:center;box-shadow:0 5px 15px rgba(30,70,40,.08);">
+    <div style="font-size:25px;">📍</div>
+    <b style="color:#173f2b;">Nearby Mandis</b><br>
+    <span style="color:#5b3a1f;font-size:13px;">Find better options</span>
+  </div>
+  <div style="background:rgba(255,255,255,.78);padding:14px;border-radius:15px;text-align:center;box-shadow:0 5px 15px rgba(30,70,40,.08);">
+    <div style="font-size:25px;">🤖</div>
+    <b style="color:#173f2b;">AI Prediction</b><br>
+    <span style="color:#5b3a1f;font-size:13px;">Price trend support</span>
+  </div>
+  <div style="background:rgba(255,255,255,.78);padding:14px;border-radius:15px;text-align:center;box-shadow:0 5px 15px rgba(30,70,40,.08);">
+    <div style="font-size:25px;">💰</div>
+    <b style="color:#173f2b;">Net Return</b><br>
+    <span style="color:#5b3a1f;font-size:13px;">Compare earnings</span>
+  </div>
+</div>
+""", unsafe_allow_html=True)
 
 # =========================================================
 # FARMER DETAILS
@@ -1142,3 +1237,4 @@ st.divider()
 st.caption(
     "🇮🇳 MandiVision AI | Smart Agriculture Decision Support System"
 )
+
