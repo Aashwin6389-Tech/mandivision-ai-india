@@ -27,23 +27,178 @@ st.set_page_config(
 
 st.markdown("""
 <style>
+
+/* =========================================================
+   🌾 MANDIVISION AI - PREMIUM FARMER THEME
+   ========================================================= */
+
+/* Main agriculture background */
+.stApp {
+    background-image:
+        linear-gradient(
+            rgba(248, 252, 247, 0.88),
+            rgba(248, 252, 247, 0.88)
+        ),
+        url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=2200&q=90");
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+
+/* Main content area */
 .block-container {
     padding-top: 1.5rem;
     padding-bottom: 2rem;
 }
 
+
+/* =========================================================
+   🌾 TITLE
+   ========================================================= */
+
 .main-title {
     text-align: center;
-    font-size: 42px;
-    font-weight: 800;
+    font-size: 44px;
+    font-weight: 900;
+    color: #14532d;
+    letter-spacing: 0.5px;
+    text-shadow: 1px 2px 4px rgba(255,255,255,0.9);
 }
 
+
+/* Subtitle */
 .subtitle {
     text-align: center;
     font-size: 18px;
-    color: #666666;
+    color: #374151;
     margin-bottom: 20px;
+    font-weight: 600;
 }
+
+
+/* =========================================================
+   🧊 GLASS EFFECT FOR STREAMLIT CONTENT
+   ========================================================= */
+
+div[data-testid="stVerticalBlockBorderWrapper"] {
+    background: rgba(255, 255, 255, 0.78);
+    border-radius: 18px;
+}
+
+
+/* =========================================================
+   🎛️ INPUT BOXES
+   ========================================================= */
+
+div[data-baseweb="select"] > div,
+div[data-testid="stNumberInput"] > div {
+    background: rgba(255, 255, 255, 0.92);
+    border-radius: 10px;
+}
+
+
+/* =========================================================
+   🚀 BUTTONS
+   ========================================================= */
+
+.stButton > button {
+    width: 100%;
+    border-radius: 12px;
+    min-height: 46px;
+    font-weight: 800;
+    border: 1px solid rgba(34, 139, 34, 0.25);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: all 0.2s ease;
+}
+
+.stButton > button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 18px rgba(0,0,0,0.13);
+}
+
+
+/* =========================================================
+   📊 TABLES
+   ========================================================= */
+
+div[data-testid="stDataFrame"] {
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.07);
+}
+
+
+/* =========================================================
+   📈 CHART AREA
+   ========================================================= */
+
+div[data-testid="stArrowVegaLiteChart"],
+div[data-testid="stVegaLiteChart"] {
+    background: rgba(255,255,255,0.72);
+    border-radius: 16px;
+    padding: 10px;
+}
+
+
+/* =========================================================
+   🧑‍🌾 HEADERS
+   ========================================================= */
+
+h1, h2, h3 {
+    font-weight: 800;
+    color: #14532d;
+}
+
+
+/* =========================================================
+   📍 INFO / SUCCESS / WARNING BOXES
+   ========================================================= */
+
+div[data-testid="stAlert"] {
+    border-radius: 14px;
+}
+
+
+/* =========================================================
+   🌿 SIDEBAR - FARM IMAGE
+   ========================================================= */
+
+section[data-testid="stSidebar"] {
+    background-image:
+        linear-gradient(
+            rgba(240, 253, 244, 0.93),
+            rgba(240, 253, 244, 0.93)
+        ),
+        url("https://images.unsplash.com/photo-1499529112087-3cb3b73cec95?auto=format&fit=crop&w=1200&q=85");
+
+    background-size: cover;
+    background-position: center;
+}
+
+
+/* =========================================================
+   📱 MOBILE RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .main-title {
+        font-size: 30px;
+    }
+
+    .subtitle {
+        font-size: 15px;
+    }
+
+    .block-container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+}
+
 </style>
 """, unsafe_allow_html=True)
 
@@ -960,4 +1115,3 @@ st.divider()
 st.caption(
     "🇮🇳 MandiVision AI | Smart Agriculture Decision Support System"
 )
-
