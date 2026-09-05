@@ -1,4 +1,4 @@
-import streamlit as st
+
 import pandas as pd
 import numpy as np
 import hashlib
@@ -49,82 +49,74 @@ st.markdown("""
 
 /* Main content area */
 .block-container {
-    padding-top: 10.5rem !important;
+    padding-top: 11rem !important;
     padding-bottom: 3rem;
     max-width: 1500px;
 }
 
 /* =========================================================
-   🌾 FIXED PREMIUM HEADER
+   🌾 FIXED PREMIUM HEADER - TITLE + SUBTITLE TOGETHER
    ========================================================= */
 
-.main-title {
+.mv-fixed-header {
     position: fixed;
-    top: 2.65rem;
+    top: 2.75rem;
     left: 0;
+    right: 0;
     width: 100%;
     z-index: 999999;
-
     text-align: center;
-    font-size: 42px;
-    line-height: 1.15;
-    font-weight: 900;
-    color: #123b2a !important;
-    letter-spacing: 0.3px;
-    text-shadow: none;
-
-    background: linear-gradient(
-        135deg,
-        rgba(235, 248, 238, 0.98),
-        rgba(255, 248, 226, 0.98)
-    );
-    border-bottom: 0;
-    padding: 9px 20px 3px 20px;
+    padding: 8px 18px 10px 18px;
     box-sizing: border-box;
+    background: linear-gradient(
+        180deg,
+        rgba(246, 252, 244, 0.99),
+        rgba(255, 249, 226, 0.98)
+    );
+    border-bottom: 2px solid rgba(67, 111, 73, 0.16);
+    box-shadow: 0 5px 18px rgba(50, 80, 45, 0.13);
     backdrop-filter: blur(12px);
-    box-shadow: 0 3px 16px rgba(20, 83, 45, 0.12);
 }
 
-/* Subtitle fixed below title */
-.subtitle {
-    position: fixed;
-    top: 5.55rem;
-    left: 0;
-    width: 100%;
-    z-index: 999998;
+.mv-fixed-header .main-title {
+    position: static;
+    width: auto;
+    margin: 0;
+    padding: 0;
+    font-size: 42px;
+    line-height: 1.08;
+    font-weight: 900;
+    color: #124b35 !important;
+    letter-spacing: 0.2px;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.9);
+}
 
-    text-align: center;
+.mv-fixed-header .subtitle {
+    position: static;
+    width: auto;
+    margin: 5px 0 0 0;
+    padding: 0;
     font-size: 17px;
     line-height: 1.25;
-    color: #5b3a1f !important;
-    font-weight: 700;
-
-    background: rgba(255, 248, 226, 0.98);
-    padding: 3px 20px 10px 20px;
-    box-sizing: border-box;
-    backdrop-filter: blur(12px);
-    box-shadow: 0 4px 14px rgba(91, 58, 31, 0.10);
+    font-weight: 800;
+    color: #6b431f !important;
+    background: transparent;
 }
 
 /* =========================================================
-   🌅 AGRICULTURE BACKGROUND
+   🌾 LIGHT FARM BACKGROUND
    ========================================================= */
 
 .stApp {
     background-image:
         linear-gradient(
-            rgba(224, 239, 220, 0.62),
-            rgba(250, 237, 204, 0.62)
+            rgba(241, 247, 232, 0.74),
+            rgba(255, 243, 211, 0.72)
         ),
-        url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=2200&q=90");
+        url("https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=2200&q=90");
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-}
-
-/* Add a soft content surface so text is readable */
-.main .block-container > div {
-    position: relative;
 }
 
 /* =========================================================
@@ -133,8 +125,8 @@ st.markdown("""
 
 h1, h2, h3 {
     font-weight: 900 !important;
-    color: #173f2b !important;
-    text-shadow: 0 1px 1px rgba(255,255,255,0.7);
+    color: #124b35 !important;
+    text-shadow: 0 1px 2px rgba(255,255,255,0.85);
 }
 
 [data-testid="stHeader"] {
@@ -143,13 +135,26 @@ h1, h2, h3 {
 
 /* Streamlit labels and normal text */
 .stMarkdown, .stText, label, [data-testid="stWidgetLabel"] {
-    color: #173f2b !important;
+    color: #163f2d !important;
 }
 
 [data-testid="stWidgetLabel"] p,
 [data-testid="stWidgetLabel"] label {
-    color: #173f2b !important;
-    font-weight: 700 !important;
+    color: #163f2d !important;
+    font-weight: 800 !important;
+}
+
+/* Make success / warning / info text readable over the farm background */
+div[data-testid="stAlert"] {
+    background: rgba(255, 255, 255, 0.92) !important;
+    border: 1px solid rgba(40, 90, 55, 0.16) !important;
+    color: #174a32 !important;
+}
+
+div[data-testid="stAlert"] p,
+div[data-testid="stAlert"] div,
+div[data-testid="stAlert"] span {
+    color: #174a32 !important;
 }
 
 /* =========================================================
@@ -183,7 +188,24 @@ div[data-testid="stNumberInput"] > div {
 
 div[data-baseweb="select"] *,
 div[data-testid="stNumberInput"] * {
-    color: #173f2b !important;
+    color: #123f2b !important;
+}
+
+div[data-baseweb="select"] input {
+    color: #123f2b !important;
+}
+
+div[role="listbox"] {
+    background: #ffffff !important;
+}
+
+div[role="option"] {
+    color: #123f2b !important;
+    background: #ffffff !important;
+}
+
+div[role="option"]:hover {
+    background: #eef7e9 !important;
 }
 
 /* =========================================================
@@ -273,21 +295,23 @@ hr {
 @media (max-width: 768px) {
 
     .block-container {
-        padding-top: 8rem !important;
+        padding-top: 8.5rem !important;
         padding-left: 0.8rem;
         padding-right: 0.8rem;
     }
 
-    .main-title {
-        top: 2.55rem;
-        font-size: 27px;
-        padding: 7px 8px 2px 8px;
+    .mv-fixed-header {
+        top: 2.65rem;
+        padding: 7px 8px 9px 8px;
     }
 
-    .subtitle {
-        top: 4.95rem;
+    .mv-fixed-header .main-title {
+        font-size: 27px;
+    }
+
+    .mv-fixed-header .subtitle {
         font-size: 13px;
-        padding: 3px 8px 8px 8px;
+        margin-top: 4px;
     }
 }
 
@@ -316,6 +340,25 @@ LANGUAGES = {
     "नेपाली (Nepali)": "ne"
 }
 
+# Speech-recognition locales are kept separate from translation codes.
+# This prevents the microphone component from receiving an unsupported locale.
+SPEECH_LOCALES = {
+    "en": "en-IN",
+    "hi": "hi-IN",
+    "bn": "bn-IN",
+    "te": "te-IN",
+    "mr": "mr-IN",
+    "ta": "ta-IN",
+    "gu": "gu-IN",
+    "kn": "kn-IN",
+    "ml": "ml-IN",
+    "pa": "pa-IN",
+    "or": "or-IN",
+    "as": "as-IN",
+    "ur": "ur-IN",
+    "ne": "ne-NP"
+}
+
 
 # =========================================================
 # SESSION STATE
@@ -340,40 +383,56 @@ top1, top2 = st.columns([2, 1])
 with top1:
     selected_language = st.selectbox(
         "🌐 Language / भाषा",
-        list(LANGUAGES.keys())
+        list(LANGUAGES.keys()),
+        key="language_selector"
     )
     language_code = LANGUAGES[selected_language]
+    speech_locale = SPEECH_LOCALES.get(language_code, "en-IN")
 
 with top2:
     st.write("### 🎤 Voice Input")
 
-    voice_text = speech_to_text(
-        language=language_code,
-        start_prompt="🎤 Speak",
-        stop_prompt="⏹ Stop",
-        just_once=True,
-        use_container_width=True,
-        key="voice_input"
-    )
+    # Use a language-specific key so Streamlit fully resets the microphone
+    # component when the user changes language.
+    try:
+        voice_text = speech_to_text(
+            language=speech_locale,
+            start_prompt="🎤 Speak",
+            stop_prompt="⏹ Stop",
+            just_once=True,
+            use_container_width=True,
+            key=f"voice_input_{language_code}"
+        )
+    except Exception:
+        # A microphone/locale problem should never break the language selector
+        # or the rest of the MandiVision app.
+        voice_text = None
+        st.caption("🎤 Voice input is temporarily unavailable for this language. The rest of the app will continue to work.")
 
 
 # =========================================================
 # TRANSLATION
 # =========================================================
 
-@st.cache_data(show_spinner=False)
+@st.cache_data(show_spinner=False, ttl=86400)
 def translate_text(text, lang):
 
-    if lang == "en":
+    # English is already the source language, so do not make a network call.
+    if lang == "en" or not text:
         return text
 
     try:
-        return GoogleTranslator(
+        translated = GoogleTranslator(
             source="auto",
             target=lang
         ).translate(text)
 
+        # Never replace working UI text with an empty/invalid translation.
+        return translated if translated else text
+
     except Exception:
+        # Translation service can occasionally be unavailable or rate-limited.
+        # Keep the English text as a safe fallback instead of showing an error.
         return text
 
 
@@ -704,12 +763,10 @@ def analyze_price_trend(history_df):
 # =========================================================
 
 st.markdown(
-    f'<div class="main-title">🌾 MandiVision AI India 🇮🇳</div>',
-    unsafe_allow_html=True
-)
-
-st.markdown(
-    f'<div class="subtitle">{T("Smart Mandi Price and Farmer Decision Support System")}</div>',
+    f'''<div class="mv-fixed-header">
+        <div class="main-title">🌾 MandiVision AI India 🇮🇳</div>
+        <div class="subtitle">{T("Smart Mandi Price and Farmer Decision Support System")}</div>
+    </div>''',
     unsafe_allow_html=True
 )
 
@@ -1237,4 +1294,3 @@ st.divider()
 st.caption(
     "🇮🇳 MandiVision AI | Smart Agriculture Decision Support System"
 )
-
