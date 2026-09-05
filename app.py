@@ -36,8 +36,8 @@ st.markdown("""
 .stApp {
     background-image:
         linear-gradient(
-            rgba(248, 252, 247, 0.88),
-            rgba(248, 252, 247, 0.88)
+            rgba(236, 248, 232, 0.48),
+            rgba(236, 248, 232, 0.48)
         ),
         url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=2200&q=90");
 
@@ -62,7 +62,7 @@ st.markdown("""
     text-align: center;
     font-size: 44px;
     font-weight: 900;
-    color: #14532d;
+    color: #166534;
     letter-spacing: 0.5px;
     text-shadow: 1px 2px 4px rgba(255,255,255,0.9);
 }
@@ -83,7 +83,7 @@ st.markdown("""
    ========================================================= */
 
 div[data-testid="stVerticalBlockBorderWrapper"] {
-    background: rgba(255, 255, 255, 0.78);
+    background: rgba(255, 255, 255, 0.32);
     border-radius: 18px;
 }
 
@@ -168,8 +168,8 @@ div[data-testid="stAlert"] {
 section[data-testid="stSidebar"] {
     background-image:
         linear-gradient(
-            rgba(240, 253, 244, 0.93),
-            rgba(240, 253, 244, 0.93)
+            rgba(220, 245, 220, 0.55),
+            rgba(220, 245, 220, 0.55)
         ),
         url("https://images.unsplash.com/photo-1499529112087-3cb3b73cec95?auto=format&fit=crop&w=1200&q=85");
 
@@ -1115,3 +1115,4 @@ st.divider()
 st.caption(
     "🇮🇳 MandiVision AI | Smart Agriculture Decision Support System"
 )
+
