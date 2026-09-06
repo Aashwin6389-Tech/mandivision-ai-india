@@ -1,4 +1,4 @@
-import streamlit
+
 st = streamlit
 import pandas as pd
 import numpy as np
@@ -96,10 +96,12 @@ st.markdown("""
    ========================================================= */
 
 .stApp {
+    /* Clean, light agriculture-inspired background.
+       No photograph is used, so text remains readable everywhere. */
     background:
-        radial-gradient(circle at 8% 12%, rgba(188, 225, 170, 0.30) 0, rgba(188, 225, 170, 0) 28%),
-        radial-gradient(circle at 92% 18%, rgba(255, 221, 153, 0.28) 0, rgba(255, 221, 153, 0) 30%),
-        linear-gradient(135deg, #f4f9ef 0%, #fbf8ea 48%, #fff5df 100%);
+        radial-gradient(circle at 12% 8%, rgba(214, 235, 199, 0.38) 0, rgba(214, 235, 199, 0) 24%),
+        radial-gradient(circle at 88% 10%, rgba(250, 226, 177, 0.30) 0, rgba(250, 226, 177, 0) 25%),
+        linear-gradient(135deg, #f7faf4 0%, #fbfaf3 50%, #fff8e9 100%) !important;
     background-attachment: fixed;
 }
 
@@ -118,7 +120,7 @@ h1, h2, h3 {
 }
 
 /* Streamlit labels and normal text */
-.stMarkdown, .stText, label, [data-testid="stWidgetLabel"] {
+.stMarkdown, .stMarkdown *, .stText, label, [data-testid="stWidgetLabel"] {
     color: #163f2d !important;
 }
 
@@ -146,7 +148,7 @@ div[data-testid="stAlert"] span {
    ========================================================= */
 
 div[data-testid="stVerticalBlockBorderWrapper"] {
-    background: rgba(255, 255, 255, 0.60);
+    background: rgba(255, 255, 255, 0.78);
     border: 1px solid rgba(255, 255, 255, 0.75);
     border-radius: 18px;
     box-shadow: 0 8px 25px rgba(40, 70, 45, 0.10);
@@ -212,6 +214,37 @@ div[role="option"]:hover {
     transform: translateY(-2px);
     box-shadow: 0 9px 22px rgba(30, 70, 40, 0.16);
     border-color: rgba(22, 101, 52, 0.35);
+}
+
+/* =========================================================
+   💰 METRICS - ALWAYS HIGH CONTRAST
+   ========================================================= */
+
+[data-testid="stMetric"] {
+    background: rgba(255, 255, 255, 0.72) !important;
+    border: 1px solid rgba(18, 75, 53, 0.10);
+    border-radius: 16px;
+    padding: 14px 16px !important;
+    box-shadow: 0 5px 16px rgba(40, 70, 45, 0.06);
+}
+
+[data-testid="stMetricLabel"],
+[data-testid="stMetricLabel"] *,
+[data-testid="stMetricValue"],
+[data-testid="stMetricValue"] *,
+[data-testid="stMetricDelta"],
+[data-testid="stMetricDelta"] * {
+    color: #123f2b !important;
+    opacity: 1 !important;
+}
+
+[data-testid="stMetricValue"] {
+    font-weight: 900 !important;
+    font-size: 2rem !important;
+}
+
+[data-testid="stMetricLabel"] {
+    font-weight: 800 !important;
 }
 
 /* =========================================================
@@ -1650,10 +1683,4 @@ else:
 # =========================================================
 # FOOTER
 # =========================================================
-
-st.divider()
-
-st.caption(
-    "🇮🇳 MandiVision AI | Smart Agriculture Decision Support System"
-)
 
