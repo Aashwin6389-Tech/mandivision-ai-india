@@ -1,5 +1,4 @@
-
-st = streamlit
+import streamlit as st
 import pandas as pd
 import numpy as np
 import hashlib
@@ -808,29 +807,6 @@ def translate_text(text, lang):
 
 def T(text):
     return translate_text(text, language_code)
-
-    # English is already the source language, so do not make a network call.
-    if lang == "en" or not text:
-        return text
-
-    try:
-        translated = GoogleTranslator(
-            source="auto",
-            target=lang
-        ).translate(text)
-
-        # Never replace working UI text with an empty/invalid translation.
-        return translated if translated else text
-
-    except Exception:
-        # Translation service can occasionally be unavailable or rate-limited.
-        # Keep the English text as a safe fallback instead of showing an error.
-        return text
-
-
-def T(text):
-    return translate_text(text, language_code)
-
 
 # =========================================================
 # CROPS
@@ -1683,4 +1659,10 @@ else:
 # =========================================================
 # FOOTER
 # =========================================================
+
+st.divider()
+
+st.caption(
+    "🇮🇳 MandiVision AI | Smart Agriculture Decision Support System"
+)
 
