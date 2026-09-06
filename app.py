@@ -33,19 +33,6 @@ st.markdown("""
    🌾 MANDIVISION AI - PREMIUM FARMER THEME
    ========================================================= */
 
-/* Main agriculture background */
-.stApp {
-    background-image:
-        linear-gradient(
-            rgba(236, 248, 232, 0.48),
-            rgba(236, 248, 232, 0.48)
-        ),
-        url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=2200&q=90");
-
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-}
 
 
 /* Main content area */
@@ -105,18 +92,14 @@ st.markdown("""
 }
 
 /* =========================================================
-   🌾 LIGHT FARM BACKGROUND
+   🌾 CLEAN FARMER-FRIENDLY BACKGROUND
    ========================================================= */
 
 .stApp {
-    background-image:
-        linear-gradient(
-            rgba(241, 247, 232, 0.74),
-            rgba(255, 243, 211, 0.72)
-        ),
-        url("https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=2200&q=90");
-    background-size: cover;
-    background-position: center;
+    background:
+        radial-gradient(circle at 8% 12%, rgba(188, 225, 170, 0.30) 0, rgba(188, 225, 170, 0) 28%),
+        radial-gradient(circle at 92% 18%, rgba(255, 221, 153, 0.28) 0, rgba(255, 221, 153, 0) 30%),
+        linear-gradient(135deg, #f4f9ef 0%, #fbf8ea 48%, #fff5df 100%);
     background-attachment: fixed;
 }
 
@@ -268,14 +251,7 @@ div[data-testid="stAlert"] {
    ========================================================= */
 
 section[data-testid="stSidebar"] {
-    background-image:
-        linear-gradient(
-            rgba(220, 245, 220, 0.68),
-            rgba(255, 248, 226, 0.68)
-        ),
-        url("https://images.unsplash.com/photo-1499529112087-3cb3b73cec95?auto=format&fit=crop&w=1200&q=85");
-    background-size: cover;
-    background-position: center;
+    background: linear-gradient(180deg, #eef7e8 0%, #fff7e5 100%) !important;
 }
 
 /* =========================================================
@@ -415,8 +391,390 @@ with top2:
 # TRANSLATION
 # =========================================================
 
+# Local UI translations keep the app usable even when Google's translation
+# endpoint returns an HTTP 500 page. Online translation is used only for
+# phrases that are not in this safe fallback dictionary.
+LOCAL_TRANSLATIONS = {
+    "hi": {
+        "Smart Mandi Price and Farmer Decision Support System": "स्मार्ट मंडी मूल्य और किसान निर्णय सहायता प्रणाली",
+        "👨‍🌾 Farmer Details": "👨‍🌾 किसान विवरण",
+        "🌾 Select Your Crop": "🌾 अपनी फसल चुनें",
+        "📦 Quantity (Quintal)": "📦 मात्रा (क्विंटल)",
+        "📍 Your Location": "📍 आपका स्थान",
+        "Click the button and allow browser location permission.": "बटन पर क्लिक करें और ब्राउज़र में लोकेशन की अनुमति दें।",
+        "📍 Enable My Current Location": "📍 मेरी वर्तमान लोकेशन सक्षम करें",
+        "Please allow location permission and try again.": "कृपया लोकेशन की अनुमति दें और फिर प्रयास करें।",
+        "Please allow location permission in your browser.": "कृपया अपने ब्राउज़र में लोकेशन की अनुमति दें।",
+        "🟢 Live location is ready!": "🟢 लाइव लोकेशन तैयार है!",
+        "🔴 Enable location before analyzing nearby mandis.": "🔴 आसपास की मंडियों का विश्लेषण करने से पहले लोकेशन सक्षम करें।",
+        "🚀 ANALYZE NEARBY MANDIS": "🚀 आसपास की मंडियों का विश्लेषण करें",
+        "❌ Please enable your current location first.": "❌ पहले अपनी वर्तमान लोकेशन सक्षम करें।",
+        "📊 Smart Mandi Comparison": "📊 स्मार्ट मंडी तुलना",
+        "📊 Price Comparison": "📊 मूल्य तुलना",
+        "📈 Price Trend Dashboard": "📈 मूल्य ट्रेंड डैशबोर्ड",
+        "📈 Historical Price Trend": "📈 ऐतिहासिक मूल्य ट्रेंड",
+        "🌾 Select Crop for Trend Analysis": "🌾 ट्रेंड विश्लेषण के लिए फसल चुनें",
+        "📅 Select Time Period": "📅 समय अवधि चुनें",
+        "📊 Market Price Statistics": "📊 बाजार मूल्य आंकड़े",
+        "📋 Historical Price Data": "📋 ऐतिहासिक मूल्य डेटा",
+        "📍 Nearest Mandis": "📍 निकटतम मंडियां",
+        "🏆 Top 3 Recommended Mandis": "🏆 शीर्ष 3 अनुशंसित मंडियां",
+        "🤖 FINAL AI RECOMMENDATION": "🤖 अंतिम AI सिफारिश",
+        "🧠 Smart Market Insight": "🧠 स्मार्ट बाजार जानकारी",
+        "🤖 Trend Status": "🤖 ट्रेंड स्थिति",
+        "Current Price": "वर्तमान मूल्य",
+        "Predicted Price": "अनुमानित मूल्य",
+        "Expected Return": "अपेक्षित रिटर्न",
+        "Expected Net Return": "अपेक्षित शुद्ध रिटर्न",
+        "Transport Cost": "परिवहन लागत",
+        "Distance": "दूरी",
+        "State": "राज्य",
+        "Crop": "फसल",
+        "Price": "मूल्य",
+        "Price Change": "मूल्य परिवर्तन",
+        "Average Price": "औसत मूल्य",
+        "⬆️ Highest Price": "⬆️ सबसे अधिक मूल्य",
+        "⬇️ Lowest Price": "⬇️ सबसे कम मूल्य",
+        "AI Reason": "AI कारण",
+        "Market Insight": "बाजार जानकारी",
+        "PRICE TREND: INCREASING": "मूल्य ट्रेंड: बढ़ रहा है",
+        "PRICE TREND: DECREASING": "मूल्य ट्रेंड: घट रहा है",
+        "PRICE TREND: STABLE": "मूल्य ट्रेंड: स्थिर है",
+        "✅ Location enabled successfully!": "✅ लोकेशन सफलतापूर्वक सक्षम हो गई!",
+    },
+    "bn": {
+        "Smart Mandi Price and Farmer Decision Support System": "স্মার্ট মান্ডি মূল্য ও কৃষক সিদ্ধান্ত সহায়তা ব্যবস্থা",
+        "👨‍🌾 Farmer Details": "👨‍🌾 কৃষকের বিবরণ",
+        "🌾 Select Your Crop": "🌾 আপনার ফসল নির্বাচন করুন",
+        "📦 Quantity (Quintal)": "📦 পরিমাণ (কুইন্টাল)",
+        "📍 Your Location": "📍 আপনার অবস্থান",
+        "📍 Enable My Current Location": "📍 আমার বর্তমান অবস্থান চালু করুন",
+        "🚀 ANALYZE NEARBY MANDIS": "🚀 কাছের মান্ডি বিশ্লেষণ করুন",
+        "🟢 Live location is ready!": "🟢 লাইভ অবস্থান প্রস্তুত!",
+        "🔴 Enable location before analyzing nearby mandis.": "🔴 কাছের মান্ডি বিশ্লেষণের আগে অবস্থান চালু করুন।",
+        "📊 Smart Mandi Comparison": "📊 স্মার্ট মান্ডি তুলনা",
+        "📈 Price Trend Dashboard": "📈 মূল্য প্রবণতা ড্যাশবোর্ড",
+        "📍 Nearest Mandis": "📍 নিকটতম মান্ডি",
+        "🏆 Top 3 Recommended Mandis": "🏆 সেরা ৩টি প্রস্তাবিত মান্ডি",
+        "Current Price": "বর্তমান মূল্য",
+        "Predicted Price": "পূর্বাভাসিত মূল্য",
+        "Expected Return": "প্রত্যাশিত রিটার্ন",
+        "Transport Cost": "পরিবহন খরচ",
+        "Distance": "দূরত্ব",
+        "State": "রাজ্য",
+        "Crop": "ফসল",
+        "Price": "মূল্য",
+        "Average Price": "গড় মূল্য",
+    },
+    "te": {
+        "Smart Mandi Price and Farmer Decision Support System": "స్మార్ట్ మండీ ధర మరియు రైతు నిర్ణయ సహాయ వ్యవస్థ",
+        "👨‍🌾 Farmer Details": "👨‍🌾 రైతు వివరాలు",
+        "🌾 Select Your Crop": "🌾 మీ పంటను ఎంచుకోండి",
+        "📦 Quantity (Quintal)": "📦 పరిమాణం (క్వింటాల్)",
+        "📍 Your Location": "📍 మీ స్థానం",
+        "📍 Enable My Current Location": "📍 నా ప్రస్తుత స్థానాన్ని ప్రారంభించండి",
+        "🚀 ANALYZE NEARBY MANDIS": "🚀 సమీప మండీలను విశ్లేషించండి",
+        "🟢 Live location is ready!": "🟢 లైవ్ లొకేషన్ సిద్ధంగా ఉంది!",
+        "🔴 Enable location before analyzing nearby mandis.": "🔴 సమీప మండీలను విశ్లేషించే ముందు స్థానాన్ని ప్రారంభించండి.",
+        "📊 Smart Mandi Comparison": "📊 స్మార్ట్ మండీ పోలిక",
+        "📈 Price Trend Dashboard": "📈 ధర ట్రెండ్ డ్యాష్‌బోర్డ్",
+        "📍 Nearest Mandis": "📍 సమీప మండీలు",
+        "🏆 Top 3 Recommended Mandis": "🏆 సిఫార్సు చేసిన టాప్ 3 మండీలు",
+        "Current Price": "ప్రస్తుత ధర",
+        "Predicted Price": "అంచనా ధర",
+        "Expected Return": "అంచనా రాబడి",
+        "Transport Cost": "రవాణా ఖర్చు",
+        "Distance": "దూరం",
+        "State": "రాష్ట్రం",
+        "Crop": "పంట",
+        "Price": "ధర",
+        "Average Price": "సగటు ధర",
+    },
+    "mr": {
+        "Smart Mandi Price and Farmer Decision Support System": "स्मार्ट मंडी किंमत आणि शेतकरी निर्णय सहाय्य प्रणाली",
+        "👨‍🌾 Farmer Details": "👨‍🌾 शेतकरी तपशील",
+        "🌾 Select Your Crop": "🌾 तुमचे पीक निवडा",
+        "📦 Quantity (Quintal)": "📦 प्रमाण (क्विंटल)",
+        "📍 Your Location": "📍 तुमचे स्थान",
+        "📍 Enable My Current Location": "📍 माझे वर्तमान स्थान सुरू करा",
+        "🚀 ANALYZE NEARBY MANDIS": "🚀 जवळच्या मंड्यांचे विश्लेषण करा",
+        "🟢 Live location is ready!": "🟢 लाइव्ह स्थान तयार आहे!",
+        "🔴 Enable location before analyzing nearby mandis.": "🔴 जवळच्या मंड्यांचे विश्लेषण करण्यापूर्वी स्थान सुरू करा.",
+        "📊 Smart Mandi Comparison": "📊 स्मार्ट मंडी तुलना",
+        "📈 Price Trend Dashboard": "📈 किंमत ट्रेंड डॅशबोर्ड",
+        "📍 Nearest Mandis": "📍 जवळच्या मंड्या",
+        "🏆 Top 3 Recommended Mandis": "🏆 शिफारस केलेल्या टॉप 3 मंड्या",
+        "Current Price": "सध्याची किंमत",
+        "Predicted Price": "अंदाजित किंमत",
+        "Expected Return": "अपेक्षित परतावा",
+        "Transport Cost": "वाहतूक खर्च",
+        "Distance": "अंतर",
+        "State": "राज्य",
+        "Crop": "पीक",
+        "Price": "किंमत",
+        "Average Price": "सरासरी किंमत",
+    },
+    "ta": {
+        "Smart Mandi Price and Farmer Decision Support System": "ஸ்மார்ட் மண்டி விலை மற்றும் விவசாயி முடிவு ஆதரவு அமைப்பு",
+        "👨‍🌾 Farmer Details": "👨‍🌾 விவசாயி விவரங்கள்",
+        "🌾 Select Your Crop": "🌾 உங்கள் பயிரைத் தேர்ந்தெடுக்கவும்",
+        "📦 Quantity (Quintal)": "📦 அளவு (குவிண்டால்)",
+        "📍 Your Location": "📍 உங்கள் இருப்பிடம்",
+        "📍 Enable My Current Location": "📍 எனது தற்போதைய இருப்பிடத்தை இயக்கவும்",
+        "🚀 ANALYZE NEARBY MANDIS": "🚀 அருகிலுள்ள மண்டிகளை பகுப்பாய்வு செய்யவும்",
+        "🟢 Live location is ready!": "🟢 நேரடி இருப்பிடம் தயாராக உள்ளது!",
+        "🔴 Enable location before analyzing nearby mandis.": "🔴 அருகிலுள்ள மண்டிகளை பகுப்பாய்வு செய்வதற்கு முன் இருப்பிடத்தை இயக்கவும்.",
+        "📊 Smart Mandi Comparison": "📊 ஸ்மார்ட் மண்டி ஒப்பீடு",
+        "📈 Price Trend Dashboard": "📈 விலை போக்கு டாஷ்போர்டு",
+        "📍 Nearest Mandis": "📍 அருகிலுள்ள மண்டிகள்",
+        "🏆 Top 3 Recommended Mandis": "🏆 பரிந்துரைக்கப்பட்ட சிறந்த 3 மண்டிகள்",
+        "Current Price": "தற்போதைய விலை",
+        "Predicted Price": "கணிக்கப்பட்ட விலை",
+        "Expected Return": "எதிர்பார்க்கப்படும் வருமானம்",
+        "Transport Cost": "போக்குவரத்து செலவு",
+        "Distance": "தூரம்",
+        "State": "மாநிலம்",
+        "Crop": "பயிர்",
+        "Price": "விலை",
+        "Average Price": "சராசரி விலை",
+    },
+    "gu": {
+        "Smart Mandi Price and Farmer Decision Support System": "સ્માર્ટ મંડી ભાવ અને ખેડૂત નિર્ણય સહાય પ્રણાલી",
+        "👨‍🌾 Farmer Details": "👨‍🌾 ખેડૂત વિગતો",
+        "🌾 Select Your Crop": "🌾 તમારો પાક પસંદ કરો",
+        "📦 Quantity (Quintal)": "📦 જથ્થો (ક્વિન્ટલ)",
+        "📍 Your Location": "📍 તમારું સ્થાન",
+        "📍 Enable My Current Location": "📍 મારું વર્તમાન સ્થાન સક્ષમ કરો",
+        "🚀 ANALYZE NEARBY MANDIS": "🚀 નજીકની મંડીનું વિશ્લેષણ કરો",
+        "🟢 Live location is ready!": "🟢 લાઇવ સ્થાન તૈયાર છે!",
+        "🔴 Enable location before analyzing nearby mandis.": "🔴 નજીકની મંડીનું વિશ્લેષણ કરતા પહેલાં સ્થાન સક્ષમ કરો.",
+        "📊 Smart Mandi Comparison": "📊 સ્માર્ટ મંડી સરખામણી",
+        "📈 Price Trend Dashboard": "📈 ભાવ ટ્રેન્ડ ડેશબોર્ડ",
+        "📍 Nearest Mandis": "📍 નજીકની મંડીઓ",
+        "🏆 Top 3 Recommended Mandis": "🏆 ભલામણ કરેલી ટોચની 3 મંડીઓ",
+        "Current Price": "વર્તમાન ભાવ",
+        "Predicted Price": "અંદાજિત ભાવ",
+        "Expected Return": "અપેક્ષિત વળતર",
+        "Transport Cost": "પરિવહન ખર્ચ",
+        "Distance": "અંતર",
+        "State": "રાજ્ય",
+        "Crop": "પાક",
+        "Price": "ભાવ",
+        "Average Price": "સરેરાશ ભાવ",
+    },
+    "kn": {
+        "Smart Mandi Price and Farmer Decision Support System": "ಸ್ಮಾರ್ಟ್ ಮಂಡಿ ಬೆಲೆ ಮತ್ತು ರೈತ ನಿರ್ಧಾರ ಸಹಾಯ ವ್ಯವಸ್ಥೆ",
+        "👨‍🌾 Farmer Details": "👨‍🌾 ರೈತ ವಿವರಗಳು",
+        "🌾 Select Your Crop": "🌾 ನಿಮ್ಮ ಬೆಳೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+        "📦 Quantity (Quintal)": "📦 ಪ್ರಮಾಣ (ಕ್ವಿಂಟಲ್)",
+        "📍 Your Location": "📍 ನಿಮ್ಮ ಸ್ಥಳ",
+        "📍 Enable My Current Location": "📍 ನನ್ನ ಪ್ರಸ್ತುತ ಸ್ಥಳವನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ",
+        "🚀 ANALYZE NEARBY MANDIS": "🚀 ಹತ್ತಿರದ ಮಂಡಿಗಳನ್ನು ವಿಶ್ಲೇಷಿಸಿ",
+        "🟢 Live location is ready!": "🟢 ಲೈವ್ ಸ್ಥಳ ಸಿದ್ಧವಾಗಿದೆ!",
+        "🔴 Enable location before analyzing nearby mandis.": "🔴 ಹತ್ತಿರದ ಮಂಡಿಗಳನ್ನು ವಿಶ್ಲೇಷಿಸುವ ಮೊದಲು ಸ್ಥಳವನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ.",
+        "📊 Smart Mandi Comparison": "📊 ಸ್ಮಾರ್ಟ್ ಮಂಡಿ ಹೋಲಿಕೆ",
+        "📈 Price Trend Dashboard": "📈 ಬೆಲೆ ಟ್ರೆಂಡ್ ಡ್ಯಾಶ್‌ಬೋರ್ಡ್",
+        "📍 Nearest Mandis": "📍 ಹತ್ತಿರದ ಮಂಡಿಗಳು",
+        "🏆 Top 3 Recommended Mandis": "🏆 ಶಿಫಾರಸು ಮಾಡಿದ ಟಾಪ್ 3 ಮಂಡಿಗಳು",
+        "Current Price": "ಪ್ರಸ್ತುತ ಬೆಲೆ",
+        "Predicted Price": "ಅಂದಾಜು ಬೆಲೆ",
+        "Expected Return": "ನಿರೀಕ್ಷಿತ ಆದಾಯ",
+        "Transport Cost": "ಸಾರಿಗೆ ವೆಚ್ಚ",
+        "Distance": "ದೂರ",
+        "State": "ರಾಜ್ಯ",
+        "Crop": "ಬೆಳೆ",
+        "Price": "ಬೆಲೆ",
+        "Average Price": "ಸರಾಸರಿ ಬೆಲೆ",
+    },
+    "ml": {
+        "Smart Mandi Price and Farmer Decision Support System": "സ്മാർട്ട് മണ്ഡി വിലയും കർഷക തീരുമാന സഹായ സംവിധാനവും",
+        "👨‍🌾 Farmer Details": "👨‍🌾 കർഷക വിവരങ്ങൾ",
+        "🌾 Select Your Crop": "🌾 നിങ്ങളുടെ വിള തിരഞ്ഞെടുക്കുക",
+        "📦 Quantity (Quintal)": "📦 അളവ് (ക്വിന്റൽ)",
+        "📍 Your Location": "📍 നിങ്ങളുടെ സ്ഥലം",
+        "📍 Enable My Current Location": "📍 എന്റെ നിലവിലെ സ്ഥലം പ്രവർത്തനക്ഷമമാക്കുക",
+        "🚀 ANALYZE NEARBY MANDIS": "🚀 സമീപ മണ്ഡികൾ വിശകലനം ചെയ്യുക",
+        "🟢 Live location is ready!": "🟢 ലൈവ് ലൊക്കേഷൻ തയ്യാറാണ്!",
+        "🔴 Enable location before analyzing nearby mandis.": "🔴 സമീപ മണ്ഡികൾ വിശകലനം ചെയ്യുന്നതിന് മുമ്പ് ലൊക്കേഷൻ പ്രവർത്തനക്ഷമമാക്കുക.",
+        "📊 Smart Mandi Comparison": "📊 സ്മാർട്ട് മണ്ഡി താരതമ്യം",
+        "📈 Price Trend Dashboard": "📈 വില ട്രെൻഡ് ഡാഷ്ബോർഡ്",
+        "📍 Nearest Mandis": "📍 സമീപ മണ്ഡികൾ",
+        "🏆 Top 3 Recommended Mandis": "🏆 ശുപാർശ ചെയ്ത മികച്ച 3 മണ്ഡികൾ",
+        "Current Price": "നിലവിലെ വില",
+        "Predicted Price": "പ്രവചിച്ച വില",
+        "Expected Return": "പ്രതീക്ഷിക്കുന്ന വരുമാനം",
+        "Transport Cost": "ഗതാഗത ചെലവ്",
+        "Distance": "ദൂരം",
+        "State": "സംസ്ഥാനം",
+        "Crop": "വിള",
+        "Price": "വില",
+        "Average Price": "ശരാശരി വില",
+    },
+    "pa": {
+        "Smart Mandi Price and Farmer Decision Support System": "ਸਮਾਰਟ ਮੰਡੀ ਕੀਮਤ ਅਤੇ ਕਿਸਾਨ ਫੈਸਲਾ ਸਹਾਇਤਾ ਪ੍ਰਣਾਲੀ",
+        "👨‍🌾 Farmer Details": "👨‍🌾 ਕਿਸਾਨ ਵੇਰਵੇ",
+        "🌾 Select Your Crop": "🌾 ਆਪਣੀ ਫਸਲ ਚੁਣੋ",
+        "📦 Quantity (Quintal)": "📦 ਮਾਤਰਾ (ਕੁਇੰਟਲ)",
+        "📍 Your Location": "📍 ਤੁਹਾਡਾ ਟਿਕਾਣਾ",
+        "📍 Enable My Current Location": "📍 ਮੇਰਾ ਮੌਜੂਦਾ ਟਿਕਾਣਾ ਚਾਲੂ ਕਰੋ",
+        "🚀 ANALYZE NEARBY MANDIS": "🚀 ਨੇੜਲੀਆਂ ਮੰਡੀਆਂ ਦਾ ਵਿਸ਼ਲੇਸ਼ਣ ਕਰੋ",
+        "🟢 Live location is ready!": "🟢 ਲਾਈਵ ਟਿਕਾਣਾ ਤਿਆਰ ਹੈ!",
+        "🔴 Enable location before analyzing nearby mandis.": "🔴 ਨੇੜਲੀਆਂ ਮੰਡੀਆਂ ਦਾ ਵਿਸ਼ਲੇਸ਼ਣ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਟਿਕਾਣਾ ਚਾਲੂ ਕਰੋ।",
+        "📊 Smart Mandi Comparison": "📊 ਸਮਾਰਟ ਮੰਡੀ ਤੁਲਨਾ",
+        "📈 Price Trend Dashboard": "📈 ਕੀਮਤ ਰੁਝਾਨ ਡੈਸ਼ਬੋਰਡ",
+        "📍 Nearest Mandis": "📍 ਨੇੜਲੀਆਂ ਮੰਡੀਆਂ",
+        "🏆 Top 3 Recommended Mandis": "🏆 ਸਿਫਾਰਸ਼ ਕੀਤੀਆਂ ਚੋਟੀ ਦੀਆਂ 3 ਮੰਡੀਆਂ",
+        "Current Price": "ਮੌਜੂਦਾ ਕੀਮਤ",
+        "Predicted Price": "ਅਨੁਮਾਨਿਤ ਕੀਮਤ",
+        "Expected Return": "ਉਮੀਦ ਕੀਤੀ ਵਾਪਸੀ",
+        "Transport Cost": "ਢੋਆ-ਢੁਆਈ ਖਰਚ",
+        "Distance": "ਦੂਰੀ",
+        "State": "ਰਾਜ",
+        "Crop": "ਫਸਲ",
+        "Price": "ਕੀਮਤ",
+        "Average Price": "ਔਸਤ ਕੀਮਤ",
+    },
+    "or": {
+        "Smart Mandi Price and Farmer Decision Support System": "ସ୍ମାର୍ଟ ମଣ୍ଡି ମୂଲ୍ୟ ଏବଂ କୃଷକ ନିଷ୍ପତ୍ତି ସହାୟତା ପ୍ରଣାଳୀ",
+        "👨‍🌾 Farmer Details": "👨‍🌾 କୃଷକ ବିବରଣୀ",
+        "🌾 Select Your Crop": "🌾 ଆପଣଙ୍କ ଫସଲ ବାଛନ୍ତୁ",
+        "📦 Quantity (Quintal)": "📦 ପରିମାଣ (କ୍ୱିଣ୍ଟାଲ)",
+        "📍 Your Location": "📍 ଆପଣଙ୍କ ସ୍ଥାନ",
+        "📍 Enable My Current Location": "📍 ମୋର ବର୍ତ୍ତମାନ ସ୍ଥାନ ସକ୍ରିୟ କରନ୍ତୁ",
+        "🚀 ANALYZE NEARBY MANDIS": "🚀 ନିକଟସ୍ଥ ମଣ୍ଡି ବିଶ୍ଳେଷଣ କରନ୍ତୁ",
+        "🟢 Live location is ready!": "🟢 ଲାଇଭ୍ ସ୍ଥାନ ପ୍ରସ୍ତୁତ!",
+        "🔴 Enable location before analyzing nearby mandis.": "🔴 ନିକଟସ୍ଥ ମଣ୍ଡି ବିଶ୍ଳେଷଣ ପୂର୍ବରୁ ସ୍ଥାନ ସକ୍ରିୟ କରନ୍ତୁ।",
+        "📊 Smart Mandi Comparison": "📊 ସ୍ମାର୍ଟ ମଣ୍ଡି ତୁଳନା",
+        "📈 Price Trend Dashboard": "📈 ମୂଲ୍ୟ ଟ୍ରେଣ୍ଡ ଡ୍ୟାସବୋର୍ଡ",
+        "📍 Nearest Mandis": "📍 ନିକଟସ୍ଥ ମଣ୍ଡି",
+        "🏆 Top 3 Recommended Mandis": "🏆 ସୁପାରିଶ କରାଯାଇଥିବା ଶ୍ରେଷ୍ଠ 3 ମଣ୍ଡି",
+        "Current Price": "ବର୍ତ୍ତମାନ ମୂଲ୍ୟ",
+        "Predicted Price": "ଅନୁମାନିତ ମୂଲ୍ୟ",
+        "Expected Return": "ଆଶାକରାଯାଇଥିବା ରିଟର୍ନ",
+        "Transport Cost": "ପରିବହନ ଖର୍ଚ୍ଚ",
+        "Distance": "ଦୂରତା",
+        "State": "ରାଜ୍ୟ",
+        "Crop": "ଫସଲ",
+        "Price": "ମୂଲ୍ୟ",
+        "Average Price": "ହାରାହାରି ମୂଲ୍ୟ",
+    },
+    "as": {
+        "Smart Mandi Price and Farmer Decision Support System": "স্মাৰ্ট মাণ্ডী মূল্য আৰু কৃষক সিদ্ধান্ত সহায়তা ব্যৱস্থা",
+        "👨‍🌾 Farmer Details": "👨‍🌾 কৃষকৰ বিৱৰণ",
+        "🌾 Select Your Crop": "🌾 আপোনাৰ শস্য বাছনি কৰক",
+        "📦 Quantity (Quintal)": "📦 পৰিমাণ (কুইণ্টাল)",
+        "📍 Your Location": "📍 আপোনাৰ অৱস্থান",
+        "📍 Enable My Current Location": "📍 মোৰ বৰ্তমান অৱস্থান সক্ৰিয় কৰক",
+        "🚀 ANALYZE NEARBY MANDIS": "🚀 ওচৰৰ মাণ্ডী বিশ্লেষণ কৰক",
+        "🟢 Live location is ready!": "🟢 লাইভ অৱস্থান সাজু!",
+        "🔴 Enable location before analyzing nearby mandis.": "🔴 ওচৰৰ মাণ্ডী বিশ্লেষণ কৰাৰ আগতে অৱস্থান সক্ৰিয় কৰক।",
+        "📊 Smart Mandi Comparison": "📊 স্মাৰ্ট মাণ্ডী তুলনা",
+        "📈 Price Trend Dashboard": "📈 মূল্য ট্ৰেণ্ড ডেশ্বব'ৰ্ড",
+        "📍 Nearest Mandis": "📍 ওচৰৰ মাণ্ডী",
+        "🏆 Top 3 Recommended Mandis": "🏆 পৰামৰ্শ দিয়া শীৰ্ষ ৩ মাণ্ডী",
+        "Current Price": "বৰ্তমান মূল্য",
+        "Predicted Price": "অনুমানিত মূল্য",
+        "Expected Return": "প্ৰত্যাশিত ৰিটাৰ্ণ",
+        "Transport Cost": "পৰিবহণ খৰচ",
+        "Distance": "দূৰত্ব",
+        "State": "ৰাজ্য",
+        "Crop": "শস্য",
+        "Price": "মূল্য",
+        "Average Price": "গড় মূল্য",
+    },
+    "ur": {
+        "Smart Mandi Price and Farmer Decision Support System": "اسمارٹ منڈی قیمت اور کسان فیصلہ معاون نظام",
+        "👨‍🌾 Farmer Details": "👨‍🌾 کسان کی تفصیلات",
+        "🌾 Select Your Crop": "🌾 اپنی فصل منتخب کریں",
+        "📦 Quantity (Quintal)": "📦 مقدار (کوئنٹل)",
+        "📍 Your Location": "📍 آپ کا مقام",
+        "📍 Enable My Current Location": "📍 میری موجودہ لوکیشن فعال کریں",
+        "🚀 ANALYZE NEARBY MANDIS": "🚀 قریبی منڈیوں کا تجزیہ کریں",
+        "🟢 Live location is ready!": "🟢 لائیو لوکیشن تیار ہے!",
+        "🔴 Enable location before analyzing nearby mandis.": "🔴 قریبی منڈیوں کا تجزیہ کرنے سے پہلے لوکیشن فعال کریں۔",
+        "📊 Smart Mandi Comparison": "📊 اسمارٹ منڈی موازنہ",
+        "📈 Price Trend Dashboard": "📈 قیمت رجحان ڈیش بورڈ",
+        "📍 Nearest Mandis": "📍 قریبی منڈیاں",
+        "🏆 Top 3 Recommended Mandis": "🏆 تجویز کردہ ٹاپ 3 منڈیاں",
+        "Current Price": "موجودہ قیمت",
+        "Predicted Price": "متوقع قیمت",
+        "Expected Return": "متوقع منافع",
+        "Transport Cost": "نقل و حمل کی لاگت",
+        "Distance": "فاصلہ",
+        "State": "ریاست",
+        "Crop": "فصل",
+        "Price": "قیمت",
+        "Average Price": "اوسط قیمت",
+    },
+    "ne": {
+        "Smart Mandi Price and Farmer Decision Support System": "स्मार्ट मन्डी मूल्य तथा किसान निर्णय सहयोग प्रणाली",
+        "👨‍🌾 Farmer Details": "👨‍🌾 किसान विवरण",
+        "🌾 Select Your Crop": "🌾 आफ्नो बाली छान्नुहोस्",
+        "📦 Quantity (Quintal)": "📦 मात्रा (क्विन्टल)",
+        "📍 Your Location": "📍 तपाईंको स्थान",
+        "📍 Enable My Current Location": "📍 मेरो हालको स्थान सक्षम गर्नुहोस्",
+        "🚀 ANALYZE NEARBY MANDIS": "🚀 नजिकका मन्डी विश्लेषण गर्नुहोस्",
+        "🟢 Live location is ready!": "🟢 लाइभ स्थान तयार छ!",
+        "🔴 Enable location before analyzing nearby mandis.": "🔴 नजिकका मन्डी विश्लेषण गर्नु अघि स्थान सक्षम गर्नुहोस्।",
+        "📊 Smart Mandi Comparison": "📊 स्मार्ट मन्डी तुलना",
+        "📈 Price Trend Dashboard": "📈 मूल्य प्रवृत्ति ड्यासबोर्ड",
+        "📍 Nearest Mandis": "📍 नजिकका मन्डी",
+        "🏆 Top 3 Recommended Mandis": "🏆 सिफारिस गरिएका शीर्ष ३ मन्डी",
+        "Current Price": "हालको मूल्य",
+        "Predicted Price": "अनुमानित मूल्य",
+        "Expected Return": "अपेक्षित आम्दानी",
+        "Transport Cost": "ढुवानी लागत",
+        "Distance": "दूरी",
+        "State": "राज्य",
+        "Crop": "बाली",
+        "Price": "मूल्य",
+        "Average Price": "औसत मूल्य",
+    },
+}
+
+
 @st.cache_data(show_spinner=False, ttl=86400)
 def translate_text(text, lang):
+
+    if lang == "en" or not text:
+        return text
+
+    # First use local translations for important UI strings.
+    local = LOCAL_TRANSLATIONS.get(lang, {})
+    if text in local:
+        return local[text]
+
+    try:
+        translated = GoogleTranslator(source="auto", target=lang).translate(text)
+        if not translated:
+            return text
+
+        # Google can occasionally return its own HTTP 500 error page as text.
+        # Never show that server message inside the app UI.
+        bad_markers = (
+            "error 500",
+            "500 (server error)",
+            "that's an error",
+            "there was an error",
+            "please try again later",
+            "server error",
+        )
+        translated_lower = str(translated).lower()
+        if any(marker in translated_lower for marker in bad_markers):
+            return text
+
+        # Guard against an unexpectedly huge HTML/error response.
+        if len(str(translated)) > max(500, len(str(text)) * 12):
+            return text
+
+        return translated
+
+    except Exception:
+        return text
+
+
+def T(text):
+    return translate_text(text, language_code)
 
     # English is already the source language, so do not make a network call.
     if lang == "en" or not text:
@@ -1298,3 +1656,4 @@ st.divider()
 st.caption(
     "🇮🇳 MandiVision AI | Smart Agriculture Decision Support System"
 )
+
