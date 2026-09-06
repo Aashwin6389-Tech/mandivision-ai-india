@@ -1,4 +1,4 @@
-import streamlit as st
+
 import pandas as pd
 import numpy as np
 import hashlib
@@ -816,7 +816,8 @@ with col1:
     crop = st.selectbox(
         T("🌾 Select Your Crop"),
         CROPS,
-        index=CROPS.index(st.session_state.selected_crop)
+        index=CROPS.index(st.session_state.selected_crop),
+        key="main_crop_selector"
     )
 
 with col2:
@@ -846,7 +847,8 @@ location = get_geolocation()
 
 if st.button(
     T("📍 Enable My Current Location"),
-    use_container_width=True
+    use_container_width=True,
+    key="enable_location_button"
 ):
 
     if location:
@@ -890,7 +892,8 @@ st.divider()
 
 analyze = st.button(
     T("🚀 ANALYZE NEARBY MANDIS"),
-    use_container_width=True
+    use_container_width=True,
+    key="analyze_nearby_mandis_button"
 )
 
 
@@ -1289,8 +1292,3 @@ else:
 # FOOTER
 # =========================================================
 
-st.divider()
-
-st.caption(
-    "🇮🇳 MandiVision AI | Smart Agriculture Decision Support System"
-)
