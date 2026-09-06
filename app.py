@@ -1,4 +1,5 @@
-
+import streamlit
+st = streamlit
 import pandas as pd
 import numpy as np
 import hashlib
@@ -1292,3 +1293,8 @@ else:
 # FOOTER
 # =========================================================
 
+st.divider()
+
+st.caption(
+    "🇮🇳 MandiVision AI | Smart Agriculture Decision Support System"
+)
