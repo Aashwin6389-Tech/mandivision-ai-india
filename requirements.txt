@@ -6,3 +6,4 @@ scikit-learn
 streamlit-js-eval
 deep-translator
 streamlit-mic-recorder
+requests
