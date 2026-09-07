@@ -1,7 +1,8 @@
-import streamlit as st
+
 import pandas as pd
 import numpy as np
 import hashlib
+import requests
 
 from math import radians, sin, cos, sqrt, atan2
 from sklearn.linear_model import LinearRegression
@@ -1013,7 +1014,7 @@ def generate_market_price(crop, mandi):
 # AI PRICE PREDICTION
 # =========================================================
 
-def predict_price(current_price):
+def predict_price(current_price, forecast_days=7):
 
     days = np.arange(1, 31)
 
@@ -1029,7 +1030,12 @@ def predict_price(current_price):
     model = LinearRegression()
     model.fit(X, prices)
 
-    future = pd.DataFrame({"Day": [37]})
+    forecast_days = int(forecast_days)
+    if forecast_days < 1 or forecast_days > 10:
+        forecast_days = 7
+
+    future_day = 30 + forecast_days
+    future = pd.DataFrame({"Day": [future_day]})
 
     prediction = model.predict(future)[0]
 
@@ -1127,6 +1133,80 @@ def analyze_price_trend(history_df):
 
 
 # =========================================================
+# WEATHER API (OPEN-METEO)
+# =========================================================
+@st.cache_data(show_spinner=False, ttl=1800)
+def get_weather_forecast(latitude, longitude):
+    """Fetch current weather and a 7-day forecast using Open-Meteo."""
+    url = "https://api.open-meteo.com/v1/forecast"
+    params = {
+        "latitude": float(latitude),
+        "longitude": float(longitude),
+        "current": "temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m",
+        "daily": "weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max,wind_speed_10m_max",
+        "forecast_days": 7,
+        "timezone": "auto"
+    }
+
+    response = requests.get(url, params=params, timeout=10)
+    response.raise_for_status()
+    return response.json()
+
+
+def weather_code_text(code):
+    """Convert WMO weather code to a farmer-friendly description."""
+    code = int(code)
+    mapping = {
+        0: "Clear sky",
+        1: "Mainly clear", 2: "Partly cloudy", 3: "Overcast",
+        45: "Fog", 48: "Depositing rime fog",
+        51: "Light drizzle", 53: "Moderate drizzle", 55: "Dense drizzle",
+        56: "Light freezing drizzle", 57: "Dense freezing drizzle",
+        61: "Light rain", 63: "Moderate rain", 65: "Heavy rain",
+        66: "Light freezing rain", 67: "Heavy freezing rain",
+        71: "Light snow", 73: "Moderate snow", 75: "Heavy snow", 77: "Snow grains",
+        80: "Light rain showers", 81: "Moderate rain showers", 82: "Violent rain showers",
+        85: "Light snow showers", 86: "Heavy snow showers",
+        95: "Thunderstorm", 96: "Thunderstorm with light hail", 99: "Thunderstorm with heavy hail"
+    }
+    return mapping.get(code, "Unknown conditions")
+
+
+def weather_icon(code):
+    code = int(code)
+    if code == 0:
+        return "☀️"
+    if code in (1, 2):
+        return "🌤️"
+    if code == 3:
+        return "☁️"
+    if code in (45, 48):
+        return "🌫️"
+    if code in (51, 53, 55, 56, 57):
+        return "🌦️"
+    if code in (61, 63, 65, 66, 67, 80, 81, 82):
+        return "🌧️"
+    if code in (71, 73, 75, 77, 85, 86):
+        return "❄️"
+    if code in (95, 96, 99):
+        return "⛈️"
+    return "🌡️"
+
+
+def weather_advice(code, rain_probability, rain_mm):
+    code = int(code)
+    if code in (95, 96, 99):
+        return "Storm risk: outdoor harvesting/transport should be planned carefully."
+    if rain_probability >= 60 or rain_mm >= 10:
+        return "Rain is possible: protect harvested produce and plan transport carefully."
+    if code in (61, 63, 65, 80, 81, 82):
+        return "Rainy conditions may affect field work and transportation."
+    if code in (0, 1, 2):
+        return "Weather looks relatively suitable for outdoor farm activities."
+    return "Check local conditions before harvesting or transporting produce."
+
+
+# =========================================================
 # HEADER
 # =========================================================
 
@@ -1197,6 +1277,15 @@ with col2:
         step=1
     )
 
+# Future price prediction horizon
+prediction_days = st.selectbox(
+    T("🤖 Future Price Prediction"),
+    [7, 10],
+    format_func=lambda x: f"{x} Days Ahead",
+    key="prediction_days"
+)
+st.caption(T("The ML model estimates the mandi price for the selected future period."))
+
 
 # =========================================================
 # LOCATION
@@ -1253,6 +1342,70 @@ else:
 
 
 # =========================================================
+# WEATHER DASHBOARD
+# =========================================================
+if (
+    st.session_state.farmer_lat is not None
+    and st.session_state.farmer_lon is not None
+):
+    st.divider()
+    st.header(T("🌦️ Local Weather Forecast"))
+    st.caption(T("Live weather is fetched for your current browser location."))
+
+    try:
+        weather = get_weather_forecast(
+            st.session_state.farmer_lat,
+            st.session_state.farmer_lon
+        )
+        current = weather.get("current", {})
+        daily = weather.get("daily", {})
+
+        w1, w2, w3, w4 = st.columns(4)
+        w1.metric("🌡️ Temperature", f"{current.get('temperature_2m', '--')} °C")
+        w2.metric("💧 Humidity", f"{current.get('relative_humidity_2m', '--')} %")
+        w3.metric("🌧️ Rain", f"{current.get('precipitation', '--')} mm")
+        w4.metric("💨 Wind", f"{current.get('wind_speed_10m', '--')} km/h")
+
+        today_code = current.get("weather_code", 0)
+        st.info(
+            f"{weather_icon(today_code)} **{weather_code_text(today_code)}** — "
+            + weather_advice(
+                today_code,
+                daily.get("precipitation_probability_max", [0])[0],
+                daily.get("precipitation_sum", [0])[0]
+            )
+        )
+
+        forecast_rows = []
+        dates = daily.get("time", [])
+        codes = daily.get("weather_code", [])
+        max_t = daily.get("temperature_2m_max", [])
+        min_t = daily.get("temperature_2m_min", [])
+        rain = daily.get("precipitation_sum", [])
+        rain_prob = daily.get("precipitation_probability_max", [])
+        wind = daily.get("wind_speed_10m_max", [])
+
+        for i, date_value in enumerate(dates):
+            code = codes[i] if i < len(codes) else 0
+            rp = rain_prob[i] if i < len(rain_prob) else 0
+            mm = rain[i] if i < len(rain) else 0
+            forecast_rows.append({
+                "Date": pd.to_datetime(date_value).strftime("%d %b"),
+                "Weather": f"{weather_icon(code)} {weather_code_text(code)}",
+                "Min °C": round(min_t[i], 1) if i < len(min_t) else None,
+                "Max °C": round(max_t[i], 1) if i < len(max_t) else None,
+                "Rain mm": round(mm, 1) if i < len(rain) else None,
+                "Rain Chance %": int(rp) if i < len(rain_prob) else None,
+                "Wind km/h": round(wind[i], 1) if i < len(wind) else None
+            })
+
+        if forecast_rows:
+            st.dataframe(pd.DataFrame(forecast_rows), use_container_width=True, hide_index=True)
+    except Exception:
+        st.warning(T("Weather service is temporarily unavailable. Mandi analysis will continue normally."))
+
+
+# =========================================================
 # ANALYZE BUTTON
 # =========================================================
 
@@ -1303,7 +1456,7 @@ if analyze:
 
         current_price = generate_market_price(crop, mandi)
 
-        predicted_price = predict_price(current_price)
+        predicted_price = predict_price(current_price, prediction_days)
 
         transport_cost = row["Distance_km"] * quantity * 0.50
 
